@@ -51,7 +51,7 @@ class Order(models.Model):
 
     customer_name = models.CharField(max_length=50, null=True, blank=True)
     customer_phone = models.CharField(max_length=20)
-    customer_address = models.CharField(max_length=255)
+    customer_address = models.CharField(max_length=255, null=True, blank=True)
     order_type = models.CharField(
         max_length=20, choices=ORDER_TYPE, default=ORDER_TYPE_DINE_IN
     )

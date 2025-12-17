@@ -89,6 +89,15 @@ class VapiOrderCreateSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ["price"]
 
+    def validate(self, data):
+        if data.get("order_type") == "delivery" and not data.get("customer_address"):
+            raise serializers.ValidationError(
+                {
+                    "customer_address": "Customer address is required for delivery orders."
+                }
+            )
+        return data
+
     def create(self, validated_data):
         items_data = validated_data.pop("items")
         order = Order.objects.create(**validated_data)
