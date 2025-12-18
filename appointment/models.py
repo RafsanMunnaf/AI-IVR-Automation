@@ -7,5 +7,15 @@ class Appointment(models.Model):
     email = models.EmailField()
     description = models.TextField(blank=True, null=True)
 
+    APPOINTMENT_STATUS = (
+        ("pending", "Pending"),
+        ("completed", "Completed"),
+        ("cancelled", "Cancelled"),
+    )
+
+    status = models.CharField(
+        max_length=20, choices=APPOINTMENT_STATUS, default="pending"
+    )
+
     def __str__(self):
-        return f"{self.name} - {self.date} at {self.time}"
+        return f"{self.name} - {self.appointment_time.strftime('%Y-%m-%d %H:%M:%S')}"
