@@ -1,3 +1,4 @@
+import re
 from rest_framework import serializers
 from .models import Category, MenuItem, Order, OrderItem
 
@@ -97,6 +98,12 @@ class VapiOrderCreateSerializer(serializers.ModelSerializer):
                 }
             )
         return data
+
+    def validate_customer_phone(self, value):
+        # matches +8801 or 01 with 11 digits
+        if not re.match(r"^(\+?88)?01[3-9]\d{8}$", value):
+            raise serializers.ValidationError("Invalid phone number format.")
+        return value
 
     def create(self, validated_data):
         items_data = validated_data.pop("items")
