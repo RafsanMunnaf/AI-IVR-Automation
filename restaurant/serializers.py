@@ -80,6 +80,7 @@ class VapiOrderCreateSerializer(serializers.ModelSerializer):
             "id",
             "customer_name",
             "customer_phone",
+            "customer_email",
             "customer_address",
             "order_type",
             "order_status",

@@ -1,3 +1,6 @@
+from django.conf import settings
+from django.core.mail import send_mail
+
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.generics import ListAPIView
 from rest_framework import viewsets
@@ -25,7 +28,15 @@ class VapiOrderAPIView(APIView):
     def post(self, request):
         serializer = VapiOrderCreateSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            order = serializer.save()
+
+            send_mail(
+                "Order Confirmation",
+                "Your order has been placed successfully.",
+                settings.EMAIL_HOST_USER,
+                [order.customer_email],
+                fail_silently=True,
+            )
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 

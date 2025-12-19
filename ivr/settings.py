@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "restaurant",
     "appointment",
+    "conversation",
 ]
 
 MIDDLEWARE = [
@@ -154,3 +155,12 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
+
+
+# EMAIL
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = env("EMAIL_HOST")
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
