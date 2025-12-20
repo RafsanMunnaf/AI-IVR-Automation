@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 import environ
 from pathlib import Path
+from corsheaders.defaults import default_headers
 
 env = environ.Env(
     # set casting, default value
@@ -147,6 +148,11 @@ SPECTACULAR_SETTINGS = {
 
 # TODO change this to production settings
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    "ngrok-skip-browser-warning",
+]
 
 CORS_ALLOW_CREDENTIALS = True
 
