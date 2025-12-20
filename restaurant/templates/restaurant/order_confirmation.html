@@ -96,14 +96,14 @@
                     <tr>
                         <td>{{ item.menu_item.name }}</td>
                         <td>{{ item.quantity }}</td>
-                        <td>${{ item.price|floatformat:2 }}</td>
+                        <td>৳{{ item.price|floatformat:2 }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
 
             <div class="total">
-                Total: ${{ total_price|floatformat:2 }}
+                Total: ৳{{ total_price|floatformat:2 }}
             </div>
         </div>
         <div class="footer">

@@ -52,7 +52,7 @@ class VapiOrderAPIView(APIView):
                 subject=f"Order Confirmation #{order.id}",
                 message=plain_message,
                 from_email=settings.EMAIL_HOST_USER,
-                recipient_list=["riwaraj779@nctime.com"],
+                recipient_list=[order.customer_email],
                 html_message=html_message,
                 fail_silently=False,
             )
