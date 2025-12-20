@@ -17,7 +17,9 @@ class ConversationSerializer(serializers.ModelSerializer):
             "call_id",
             "started_at",
             "ended_at",
+            "duration_ms",
             "duration_seconds",
+            "duration_minutes",
             "summary",
             "messages",
         ]
@@ -34,15 +36,19 @@ class VapiWebhookSerializer(serializers.Serializer):
         msg_data = self.validated_data.get("message", {})
         call_data = msg_data.get("call", {})
         artifact_data = msg_data.get("artifact", {})
-        analysis_data = msg_data.get("analysis", {})
+        # analysis_data = msg_data.get("analysis", {})
 
         # 1. Update or Create the Conversation
         conversation, _ = Conversation.objects.update_or_create(
             call_id=call_data.get("id"),
             defaults={
-                "started_at": call_data.get("startedAt"),
-                "ended_at": call_data.get("endedAt"),
-                "summary": analysis_data.get("summary"),
+                "started_at": msg_data.get("startedAt") or call_data.get("startedAt"),
+                "ended_at": msg_data.get("endedAt") or call_data.get("endedAt"),
+                "summary": msg_data.get("summary")
+                or msg_data.get("analysis", {}).get("summary"),
+                "duration_ms": msg_data.get("durationMs"),
+                "duration_seconds": msg_data.get("durationSeconds"),
+                "duration_minutes": msg_data.get("durationMinutes"),
             },
         )
 

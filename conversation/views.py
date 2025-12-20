@@ -30,20 +30,21 @@ class ConversationRetrieveAPIView(generics.RetrieveAPIView):
 
 class VapiWebhookAPIView(APIView):
     def post(self, request, *args, **kwargs):
-        # Identify the type of message from Vapi
-        message_type = request.data.get("message", {}).get("type")
+        vapi_msg = request.data.get("message", {})
+        message_type = vapi_msg.get("type")
 
-        # We only care about the end-of-call-report for database storage
         if message_type == "end-of-call-report":
+            # Pass the WHOLE request.data to the serializer
+            # because the serializer expects a 'message' key
             serializer = VapiWebhookSerializer(data=request.data)
+
             if serializer.is_valid():
                 serializer.save()
                 return Response(
                     {"status": "success", "message": "Call stored"},
                     status=status.HTTP_201_CREATED,
                 )
-                print(serializer)
+
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        # Return 200 OK for other message types so Vapi doesn't think your server is down
         return Response({"status": "ignored"}, status=status.HTTP_200_OK)

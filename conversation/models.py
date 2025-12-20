@@ -6,7 +6,9 @@ class Conversation(models.Model):
     # Using null=True so we can record the actual Vapi timestamps
     started_at = models.DateTimeField(null=True, blank=True)
     ended_at = models.DateTimeField(null=True, blank=True)
-    duration_seconds = models.IntegerField(null=True, blank=True)
+    duration_ms = models.IntegerField(null=True, blank=True)
+    duration_seconds = models.FloatField(null=True, blank=True)
+    duration_minutes = models.FloatField(null=True, blank=True)
     summary = models.TextField(blank=True, null=True)
 
     def __str__(self):
