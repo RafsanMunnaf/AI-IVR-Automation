@@ -1,5 +1,7 @@
 from django.conf import settings
 from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.generics import ListAPIView
@@ -30,12 +32,29 @@ class VapiOrderAPIView(APIView):
         if serializer.is_valid():
             order = serializer.save()
 
+            # Calculate total price and prepare email context
+            items = order.items.select_related("menu_item").all()
+            total_price = sum(item.price * item.quantity for item in items)
+
+            context = {
+                "customer_name": order.customer_name or "Customer",
+                "order": order,
+                "items": items,
+                "total_price": total_price,
+            }
+
+            html_message = render_to_string(
+                "restaurant/order_confirmation.html", context
+            )
+            plain_message = strip_tags(html_message)
+
             send_mail(
-                "Order Confirmation",
-                "Your order has been placed successfully.",
-                settings.EMAIL_HOST_USER,
-                [order.customer_email],
-                fail_silently=True,
+                subject=f"Order Confirmation #{order.id}",
+                message=plain_message,
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=["riwaraj779@nctime.com"],
+                html_message=html_message,
+                fail_silently=False,
             )
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)

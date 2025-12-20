@@ -148,12 +148,6 @@ SPECTACULAR_SETTINGS = {
 # TODO change this to production settings
 CORS_ALLOW_ALL_ORIGINS = True
 
-from corsheaders.defaults import default_headers
-
-CORS_ALLOW_HEADERS = list(default_headers) + [
-    "ngrok-skip-browser-warning",
-]
-
 CORS_ALLOW_CREDENTIALS = True
 
 
