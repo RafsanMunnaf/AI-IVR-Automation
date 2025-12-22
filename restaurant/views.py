@@ -48,14 +48,19 @@ class VapiOrderAPIView(APIView):
             )
             plain_message = strip_tags(html_message)
 
-            send_mail(
-                subject=f"Order Confirmation #{order.id}",
-                message=plain_message,
-                from_email=settings.EMAIL_HOST_USER,
-                recipient_list=[order.customer_email],
-                html_message=html_message,
-                fail_silently=False,
-            )
+            try:
+                print("Sending mail")
+                send_mail(
+                    subject=f"Order Confirmation #{order.id}",
+                    message=plain_message,
+                    from_email="saminafis.dev@gmail.com",
+                    recipient_list=[order.customer_email],
+                    html_message=html_message,
+                    fail_silently=False,
+                )
+            except Exception as e:
+                print("Email failed:", e)
+
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
