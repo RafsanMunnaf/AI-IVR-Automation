@@ -1,8 +1,11 @@
 from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
+from django.utils import timezone
 from django.utils.html import strip_tags
 from rest_framework.generics import ListCreateAPIView
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .models import Appointment
 from .serializers import AppointmentSerializer
@@ -32,3 +35,8 @@ class AppointmentListCreateAPIView(ListCreateAPIView):
             html_message=html_message,
             fail_silently=True,
         )
+
+
+class CurrentDateTimeAPIView(APIView):
+    def get(self, request):
+        return Response({"current_datetime": timezone.now()})
