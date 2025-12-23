@@ -5,7 +5,7 @@ class Appointment(models.Model):
     appointment_time = models.DateTimeField()
     name = models.CharField(max_length=100)
     email = models.EmailField()
-    description = models.TextField(blank=True, null=True)
+    description = models.TextField()
 
     APPOINTMENT_STATUS = (
         ("pending", "Pending"),
