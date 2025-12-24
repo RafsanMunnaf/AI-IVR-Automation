@@ -39,4 +39,4 @@ class AppointmentListCreateAPIView(ListCreateAPIView):
 
 class CurrentDateTimeAPIView(APIView):
     def get(self, request):
-        return Response({"current_datetime": timezone.now()})
+        return Response({"current_datetime": timezone.localtime()})

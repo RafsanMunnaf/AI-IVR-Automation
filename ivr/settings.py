@@ -91,13 +91,26 @@ WSGI_APPLICATION = "ivr.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
+LOCAL_DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
+
+PROD_DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env("PROD_DB_NAME"),
+        "USER": env("PROD_DB_USER"),
+        "PASSWORD": env("PROD_DB_PASS"),
+        "HOST": env("PROD_DB_HOST"),
+        "PORT": env("PROD_DB_PORT"),
+    }
+}
+
+DATABASES = PROD_DATABASES
 
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
