@@ -1,6 +1,12 @@
 # restaurant_ivr
 
+## Project Structure
 
+This repository follows a monorepo structure:
+
+- `backend/`: Django backend application (formerly the root project).
+- `frontend/`: Placeholder for the frontend application.
+- `ai/`: Placeholder for AI-related code.
 
 ## Getting started
 
