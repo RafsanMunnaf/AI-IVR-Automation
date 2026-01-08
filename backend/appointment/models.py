@@ -6,6 +6,8 @@ class Appointment(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
     description = models.TextField()
+    business_name = models.CharField(max_length=100)
+    business_address = models.CharField(max_length=255)
 
     APPOINTMENT_STATUS = (
         ("pending", "Pending"),

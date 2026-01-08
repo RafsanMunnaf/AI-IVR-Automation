@@ -6,7 +6,15 @@ from .models import Appointment
 class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Appointment
-        fields = ["appointment_time", "name", "email", "description", "status"]
+        fields = [
+            "appointment_time",
+            "name",
+            "email",
+            "description",
+            "status",
+            "business_name",
+            "business_address",
+        ]
         read_only_fields = ["status"]
 
     def validate_appointment_time(self, value):
