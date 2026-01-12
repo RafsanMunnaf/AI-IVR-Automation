@@ -27,11 +27,11 @@ class AppointmentSerializer(serializers.ModelSerializer):
                 "Appointments can only be booked on the hour (e.g., 9:00, 10:00)."
             )
 
-        # Check if hour is within 9am and 2pm (14:00)
-        # 9, 10, 11, 12, 13, 14
-        if value.hour not in [9, 10, 11, 12, 13, 14]:
+        # Check if hour is within 9am and 6pm (18:00)
+        # 9, 10, 11, 12, 13, 14, 15, 16, 17, 18
+        if value.hour not in [9, 10, 11, 12, 13, 14, 15, 16, 17, 18]:
             raise serializers.ValidationError(
-                "Appointments are only available between 9:00 AM and 2:00 PM."
+                "Appointments are only available between 9:00 AM and 6:00 PM."
             )
 
         return value
