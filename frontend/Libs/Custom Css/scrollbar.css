@@ -1,0 +1,56 @@
+/* Webkit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #010236;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #0A48CD;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #030572;
+}
+
+/* Firefox */
+body {
+    scrollbar-width: thin;
+    scrollbar-color: #ABD2F3 transparent;
+}
+
+
+
+/* Textarea specific scrollbar styling */
+
+textarea::-webkit-scrollbar {
+    width: 8px;
+   
+}
+
+textarea::-webkit-scrollbar-track {
+    background-color: #f1f1f100;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background-color: #428AD5;
+    border-radius: 10px;
+
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+    background-color: #032AB5;
+ 
+}
+
+textarea {
+    scrollbar-width: thin;
+    scrollbar-color: #032AB5 transparent;
+}
+textarea:focus {
+    scrollbar-color: #032AB5 transparent;
+}
