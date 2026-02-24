@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+html{
+    scroll-behavior: smooth;
+}
+
+@theme {
+    --color-primary: #010236;
+    --color-secondary: #0A48CD;
+}
+
+
+
+
+
+.glass-panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Custom Swiper Styles */
+.swiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 800px;
+    max-width: 85vw;
+}
+
+.swiper-pagination-bullet {
+    background: rgba(255, 255, 255, 0.2) !important;
+    opacity: 1 !important;
+    width: 12px !important;
+    height: 4px !important;
+    border-radius: 2px !important;
+    transition: all 0.3s ease !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: #6366f1 !important;
+    width: 32px !important;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+
+
+/* //////all animations */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fade-in 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
+    }
+}
+
+@keyframes gradient-blink {
+    0%, 100% {
+        background-size: 90% 90%;
+    }
+    50% {
+        background-size: 130% 130%;
+    }
+}
+
+.gradient-pulse {
+    background-size: 100% 100%;
+    background-position: center;
+    animation: gradient-blink 3s ease-in-out infinite;
+}
+ /* background: radial-gradient(circle at center,
+     rgba(10, 72, 205, 0.4) 0%,
+     transparent 50%); */
+
+.animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
